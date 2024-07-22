@@ -12,4 +12,5 @@ export default function Index() {
   return (
     <Navigation />
   );
+  
 }
