@@ -1,11 +1,20 @@
 import { View, Text, TouchableWithoutFeedback, Image } from "react-native";
 import React from "react";
-import * as Icons from "react-native-feather"
+import * as Icons from "react-native-feather";
+import { themeColors } from "@/theme";
+import { useNavigation } from "expo-router";
 
 export default function ReastaurantCard({ item }) {
+  const navigation = useNavigation();
   return (
-    <TouchableWithoutFeedback>
-      <View className="mr-6 bg-white rounded-3xl shadow-black shadow-lg ">
+    <TouchableWithoutFeedback onPress={()=>{navigation.navigate("Reastaurant",{...item})}}>
+      <View
+        style={{
+          shadowColor: themeColors.bgColor(0.2),
+          shadowRadius: 7,
+        }}
+        className="mr-6 bg-white rounded-3xl  shadow-lg "
+      >
         <Image className="h-36 w-64 rounded-t-3xl" source={item.image} />
         <View className="px-3 pb-4 space-y-2">
           <Text className="text-lg font-bold pt-2">{item.name}</Text>
@@ -17,9 +26,9 @@ export default function ReastaurantCard({ item }) {
               <Text className="font-semibold">{item.category}</Text>
             </Text>
           </View>
-          <View className='flex-row items-center space-x-1 '>
-            <Icons.MapPin color={"gray"} height={'15'} width={'15'} />
-            <Text className='text-gray-700 text-xs'>{item.address}</Text>
+          <View className="flex-row items-center space-x-1 ">
+            <Icons.MapPin color={"gray"} height={"15"} width={"15"} />
+            <Text className="text-gray-700 text-xs">{item.address}</Text>
           </View>
         </View>
       </View>

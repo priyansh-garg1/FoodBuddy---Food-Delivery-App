@@ -41,7 +41,40 @@ export const featured = {
             priceRange: "$$",
             category: "lorem Ipsum ",
             reviews:"4.4k",
-            address:"Ney Yordk, NYC"
+            address:"Ney Yordk, NYC",
+            lat: "3901",
+            long: "3902",
+            dishes:[
+              {
+                id: 1,
+                name: "Dish 1",
+                price: 10,
+                description: "lorem Ipsum and others",
+                image: require("./../assets/images/bike.png")
+              },
+              {
+                id: 2,
+                name: "Dish 2",
+                price: 101,
+                description: "lorem Ipsum and others",
+                image: require("./../assets/images/bike.png")
+              },
+              {
+                id: 3,
+                name: "Dish 3",
+                price: 1022,
+                description: "lorem Ipsum and others",
+                image: require("./../assets/images/bike.png")
+              },
+              {
+                id: 4,
+                name: "Dish 4",
+                price: 440,
+                description: "lorem Ipsum and others",
+                image: require("./../assets/images/bike.png")
+              },
+
+            ]
         },
         {
             id: 2,
