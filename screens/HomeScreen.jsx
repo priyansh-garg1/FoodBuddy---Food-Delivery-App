@@ -10,7 +10,7 @@ import { featured } from "@/constants";
 
 export default function HomeScreen() {
   return (
-    <SafeAreaView className="bg-white mt-4">
+    <SafeAreaView className="bg-red-50 mt-4">
       <StatusBar barStyle="dark-content" />
       <View className="flex-row items-center space-x-2 px-4 pb-2 ">
         <View className="flex-row flex-1 items-center p-3 rounded-full border border-gray-300">

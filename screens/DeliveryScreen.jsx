@@ -9,24 +9,7 @@ export default function DeliveryScreen() {
   const reasturant = featured.restaurants[0];
   const navigation = useNavigation();
   return (
-    <View>
-      <MapView
-        initialRegion={{
-          latitude: reasturant.lat,
-          longitude: reasturant.long,
-          latitudeDelta: 0.01,
-          longitudeDelta: 0.01,
-        }}
-        className="flex-1"
-        mapType="standard"
-      >
-        <Marker
-          coordinate={{ latitude: reasturant.lat, longitude: reasturant.long }}
-          title={reasturant.name}
-          description={reasturant.address}
-          pinColor={themeColors.bgColor(1)}
-        />
-      </MapView>
+    <View className='mt-96'>
       <View className="rounded-t-3xl -mt-32 bg-white relative">
         <View className="flex-row justify-between px-5 pt-10">
           <View>

@@ -42,8 +42,8 @@ export const featured = {
             category: "lorem Ipsum ",
             reviews:"4.4k",
             address:"Ney Yordk, NYC",
-            lat: "3901",
-            long: "3902",
+            lat: "",
+            long: "",
             dishes:[
               {
                 id: 1,
