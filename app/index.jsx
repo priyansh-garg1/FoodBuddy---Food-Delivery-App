@@ -1,16 +1,19 @@
-import { useNavigation } from 'expo-router';
-import Navigation from './navigation'
-import { useEffect } from 'react';
+import { useNavigation } from "expo-router";
+import Navigation from "./navigation";
+import { useEffect } from "react";
+import { Provider } from "react-redux";
+import { store } from "../store.js";
 export default function Index() {
-  const navigation = useNavigation()
+  const navigation = useNavigation();
   useEffect(() => {
     navigation.setOptions({
-      headerShown:false
-    })
-  }, [])
-  
+      headerShown: false,
+    });
+  }, []);
+
   return (
-    <Navigation />
+    <Provider store={store}>
+      <Navigation />
+    </Provider>
   );
-  
 }

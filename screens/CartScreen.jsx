@@ -4,9 +4,12 @@ import { featured } from "@/constants";
 import { themeColors } from "@/theme";
 import * as Icons from "react-native-feather";
 import { useNavigation } from "@react-navigation/native";
+import { useSelector } from "react-redux";
+import { selectReasturant } from "@/slices/restuarantSlice";
 
 export default function CartScreen() {
-  const reastaurant = featured.restaurants[0];
+  const reastaurant = useSelector(selectReasturant);
+  console.log(reastaurant,"Get in cart");
   const navigation = useNavigation();
   return (
     <View className="bg-white flex-1 pt-7 ">
