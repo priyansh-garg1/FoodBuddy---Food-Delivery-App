@@ -12,14 +12,12 @@ import { setRestuarant } from "@/slices/restuarantSlice";
 export default function ReastaurantScreen() {
   const { params } = useRoute();
   let item = params;
-  console.log(item);
   const navigation = useNavigation();
   const dispatch = useDispatch()
   useEffect(()=>{
     if(item && item.id){
-      console.log(item.id);
       dispatch(setRestuarant({...item}))
-      console.log("Saved res");
+      console.log(item);
     }
   },[])
   return (

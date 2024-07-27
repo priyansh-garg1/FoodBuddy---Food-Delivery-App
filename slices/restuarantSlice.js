@@ -11,13 +11,13 @@ export const restuarantSlice = createSlice({
   reducers: {
     setRestuarant: (state, action) => {
       state.restuarant = action.payload
-      console.log(action.payload);
     },
   },
 })
 
 export const { setRestuarant } = restuarantSlice.actions
 
-export const selectReasturant = state => state.restuarant.restuarant;
+// export const selectReasturant = state => state.restuarant.restuarant;
+export const selectReasturant = state => state.resturant.restuarant;
 
 export default restuarantSlice.reducer

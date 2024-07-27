@@ -1,16 +1,33 @@
 import { View, Text, TouchableOpacity, Image, ScrollView } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { featured } from "@/constants";
 import { themeColors } from "@/theme";
 import * as Icons from "react-native-feather";
 import { useNavigation } from "@react-navigation/native";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectReasturant } from "@/slices/restuarantSlice";
+import { removeFromCart, selectCartItems, selectCartTotal } from "@/slices/cartSlice";
 
 export default function CartScreen() {
-  const reastaurant = useSelector(selectReasturant);
-  console.log(reastaurant,"Get in cart");
+  const reastaurant = useSelector(state => state.resturant.restuarant);
+  const cartItmes = useSelector(selectCartItems)
+  const cartTotal = useSelector(selectCartTotal);
   const navigation = useNavigation();
+  const dispatch = useDispatch()
+  const [groupItems,setGroupItems] = useState({});
+  const deliveryFee = Math.ceil(cartTotal/98);
+
+  useEffect(() => {
+    const items = cartItmes.reduce((group, item)=>{
+      if(group[item.id]){
+        group[item.id].push(item);
+      }else{
+        group[item.id] = [item];
+      }
+      return group;
+    },{})
+    setGroupItems(items);
+  },[cartItmes])
   return (
     <View className="bg-white flex-1 pt-7 ">
       <View className="relative py-4 shadow-sm">
@@ -23,7 +40,7 @@ export default function CartScreen() {
         </TouchableOpacity>
         <View>
           <Text className="text-center font-bold text-2xl">Your Cart</Text>
-          <Text className="text-center text-gray-500">{reastaurant.name}</Text>
+          <Text className="text-center text-gray-500">{reastaurant?.name}</Text>
         </View>
       </View>
       <View
@@ -48,21 +65,23 @@ export default function CartScreen() {
         }}
         className="bg-white pt-5"
       >
-        {reastaurant.dishes.map((dish, index) => {
+        {Object.entries(groupItems)?.map(([key,items]) => {
+          let dish = items[0]
           return (
             <View
-              key={index}
+              key={key}
               className="flex-row items-center py-2 px-4 bg-gray-100 rounded-3xl mx-2 space-x-3 mb-3 shadow-lg"
             >
               <Text className="font-bold" style={{ color: themeColors.text }}>
-                2 x
+                {items.length} x
               </Text>
-              <Image className="h-14 w-14 rounded-full" source={dish.image} />
+              <Image className="h-14 w-14 rounded-full" source={dish?.image} />
               <Text className="flex-1 font-bold text-gray-700">
-                {dish.name}
+                {dish?.name}
               </Text>
-              <Text className="font-semibold text-base">${dish.price}</Text>
+              <Text className="font-semibold text-base">${dish?.price}</Text>
               <TouchableOpacity
+              onPress={()=>dispatch(removeFromCart({id:dish?.id}))}
                 className="p-1 rounded-full"
                 style={{ backgroundColor: themeColors.bgColor(1) }}
               >
@@ -83,15 +102,15 @@ export default function CartScreen() {
       >
         <View className="flex-row justify-between">
           <Text className="text-gray-700">Subtotal</Text>
-          <Text className="text-gray-700">$20</Text>
+          <Text className="text-gray-700">${cartTotal}</Text>
         </View>
         <View className="flex-row justify-between">
           <Text className="text-gray-700">Delivery Fee</Text>
-          <Text className="text-gray-700">$2</Text>
+          <Text className="text-gray-700">${deliveryFee}</Text>
         </View>
         <View className="flex-row justify-between">
           <Text className="text-gray-700">Order Total</Text>
-          <Text className="text-gray-700 font-bold">$22</Text>
+          <Text className="text-gray-700 font-bold">${cartTotal+deliveryFee}</Text>
         </View>
         <View>
           <TouchableOpacity

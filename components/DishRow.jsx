@@ -3,16 +3,22 @@ import React from "react";
 import { themeColors } from "@/theme";
 import * as Icons from "react-native-feather";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart, removeFromCart, selectCartItemsById } from "@/slices/cartSlice";
+import {
+  addToCart,
+  removeFromCart,
+  selectCartItemsById,
+} from "@/slices/cartSlice";
 
 export default function DishRow({ item }) {
-  const totalItems = useSelector(state => selectCartItemsById(state,item.id))
+  const totalItems = useSelector((state) =>
+    selectCartItemsById(state, item.id)
+  );
   const dispatch = useDispatch();
   const handleIncrease = () => {
-    dispatch(addToCart({...item}))
+    dispatch(addToCart({ ...item }));
   };
   const handleDecrease = () => {
-    dispatch(removeFromCart({id: item.id}))
+    dispatch(removeFromCart({ id: item.id }));
   };
   return (
     <View className="flex-row items-center bg-white p-3 rounded-3xl shadow-2xl mb-3 mx-2">
@@ -30,7 +36,8 @@ export default function DishRow({ item }) {
           <Text className="text-gray-700 text-lg font-bold">${item.price}</Text>
           <View className="flex-row items-center">
             <TouchableOpacity
-            onPress={handleDecrease}
+              onPress={handleDecrease}
+              disabled={!totalItems.length}
               style={{ backgroundColor: themeColors.bgColor(1) }}
               className="p-1 rounded-full"
             >
